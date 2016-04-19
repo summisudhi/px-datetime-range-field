@@ -11,11 +11,11 @@ Component with all the date/time range fields which are displayed in the range p
 
 ##### Usage
 
-    <px-datetime-range-input from={{...}} to={{...}}>
-    </px-datetime-range-input>
+    <px-datetime-range-field from={{...}} to={{...}}>
+    </px-datetime-range-field>
 -->
-<dom-module id="px-datetime-range-input">
-  <link rel="import" type="css" href="css/px-datetime-range-input.css"/>
+<dom-module id="px-datetime-range-field">
+  <link rel="import" type="css" href="css/px-datetime-range-field.css"/>
   <template>
     <div class="form flex flex--middle flex--wrap">
       <div id="fromFields" class="flex flex--middle text-input ">
@@ -76,7 +76,7 @@ Component with all the date/time range fields which are displayed in the range p
 <script>
   Polymer({
 
-    is: 'px-datetime-range-input',
+    is: 'px-datetime-range-field',
 
     properties: {
       /**

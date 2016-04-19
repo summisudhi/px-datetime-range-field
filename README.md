@@ -1,9 +1,9 @@
-Px-Datetime-Range-Input
+Px-Datetime-Range-Field
 -----------------------------------------------
 
 ## Overview
 
-Px-Datetime-Range-Input is a Predix Experience ('Px') component
+Px-Datetime-Range-Field is a Predix Experience ('Px') component
 
 ## Getting Started
 

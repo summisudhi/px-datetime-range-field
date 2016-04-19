@@ -9,6 +9,6 @@ module.exports = {
     }
   },
   suites: [
-    'test/px-datetime-range-input-test-fixture.html'
+    'test/px-datetime-range-field-test-fixture.html'
   ]
 };

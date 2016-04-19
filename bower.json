@@ -1,8 +1,8 @@
 {
-    "name": "px-datetime-range-input",
+    "name": "px-datetime-range-field",
     "version": "0.0.1",
     "main": [
-        "px-datetime-range-input.html"
+        "px-datetime-range-field.html"
     ],
     "ignore": [
         ".*",
