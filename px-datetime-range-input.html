@@ -2,6 +2,8 @@
 <link rel="import" href="../px-datetime-common/px-datetime-entry.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-common.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-common.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
+<link rel="import" href="../px-datetime-common/validate.html"/>
 <script src="../moment/moment.js"></script>
 
 <!--
@@ -59,12 +61,13 @@ Component with all the date/time range fields which are displayed in the range p
         </px-datetime-entry>
       </div>
       <template is="dom-if" if="{{_showRangeFieldButtons(rangeFieldButtonsDisplay)}}">
-        <px-date-time-buttons
+        <px-datetime-buttons
           id="dtBtns"
           class$="{{_addHiddenClass(rangeFieldButtonsDisplay)}}"
           is-submit-button-valid="{{isSubmitButtonValid}}"
           hide-submit$="{{_hideSubmitButton(dateTimeButtonsDisplay)}}"
-          hide-cancel$="{{_hideCancelButton(dateTimeButtonsDisplay)}}"></px-date-time-buttons>
+          hide-cancel$="{{_hideCancelButton(dateTimeButtonsDisplay)}}">
+        </px-datetime-buttons>
       </template>
     </div>
   </template>
