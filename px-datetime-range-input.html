@@ -1,71 +1,294 @@
-
-<!--
-    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
-    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
-    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
--->
 <link rel="import" href="../polymer/polymer.html"/>
-
+<link rel="import" href="../px-datetime-common/px-datetime-entry.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-common.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-range-common.html"/>
+<script src="../moment/moment.js"></script>
 
 <!--
-Element providing solution to no problem in particular. As a simple, increments a counter when clicked.
+Component with all the date/time range fields which are displayed in the range picker.
 
 ##### Usage
 
-    <px-datetime-range-input counter-value="1">Hi</px-datetime-range-input>
-
-@element px-datetime-range-input
-@blurb Element providing solution to no problem in particular.
-@homepage index.html
-@demo demo.html
+    <px-datetime-range-input from={{...}} to={{...}}>
+    </px-datetime-range-input>
 -->
 <dom-module id="px-datetime-range-input">
-    <link rel="import" type="css" href="css/px-datetime-range-input.css"/>
-    <template>
-        <div class="circle counter" on-click="handleClick">
-            <span>{{counterValue}}</span>
-            <content></content>
-        </div>
-    </template>
+  <link rel="import" type="css" href="css/px-datetime-range-input.css"/>
+  <template>
+    <div class="form flex flex--middle flex--wrap">
+      <div id="fromFields" class="flex flex--middle text-input ">
+        <span class=a11y>from</span>
+        <px-datetime-entry
+          id="fromDate"
+          is-valid="{{validStartDate}}"
+          neighbor-valid="[[validStartTime]]"
+          moment="{{fromMoment}}"
+          date-or-time="Date"
+          class="flex u-mr-"
+          is-submit-button-valid="{{isSubmitButtonValid}}">
+        </px-datetime-entry>
+        <px-datetime-entry
+          id="fromTime"
+          is-valid="{{validStartTime}}"
+          neighbor-valid="[[validStartDate]]"
+          moment="{{fromMoment}}"
+          date-or-time="Time"
+          class="flex"
+          is-submit-button-valid="{{isSubmitButtonValid}}">
+        </px-datetime-entry>
+      </div>
+      <span class="caps u-mh-">to</span>
+      <div id="toFields" class="flex flex--middle text-input u-mr+ ">
+        <px-datetime-entry
+          id="toDate"
+          is-valid="{{validEndDate}}"
+          neighbor-valid="[[validEndTime]]"
+          moment="{{toMoment}}"
+          date-or-time="Date"
+          class="flex u-mr-"
+          is-submit-button-valid="{{isSubmitButtonValid}}">
+        </px-datetime-entry>
+        <px-datetime-entry
+          id="toTime"
+          is-valid="{{validEndTime}}"
+          neighbor-valid="[[validEndDate]]"
+          moment="{{toMoment}}"
+          date-or-time="Time"
+          class="flex"
+          is-submit-button-valid="{{isSubmitButtonValid}}">
+        </px-datetime-entry>
+      </div>
+      <template is="dom-if" if="{{_showRangeFieldButtons(rangeFieldButtonsDisplay)}}">
+        <px-date-time-buttons
+          id="dtBtns"
+          class$="{{_addHiddenClass(rangeFieldButtonsDisplay)}}"
+          is-submit-button-valid="{{isSubmitButtonValid}}"
+          hide-submit$="{{_hideSubmitButton(dateTimeButtonsDisplay)}}"
+          hide-cancel$="{{_hideCancelButton(dateTimeButtonsDisplay)}}"></px-date-time-buttons>
+      </template>
+    </div>
+  </template>
 </dom-module>
 
 <script>
-    Polymer({
+  Polymer({
 
-        is: 'px-datetime-range-input',
+    is: 'px-datetime-range-input',
 
-        
+    properties: {
+      /**
+       * Boolean set when all field pass validation
+       *
+       * @default true
+       */
+      allFieldsValid: {
+        type: Boolean,
+        value: true,
+        notify: true
+      },
+      // TODO Move to range-field
+      /**
+       * Set to yes to clear invalid dates
+       *
+       * @default no
+       */
+      clearInvaild:{
+        type:String,
+        value:'no'
+      },
+      /**TODO update doc
+       * String to decide whether to show or hide apply and cancel buttons in the range fields
+       * - 'show-all' - Buttons are shown at all times
+       * - 'hide-submit' - Submit button is hidden; only cancel button is shown
+       * - 'hide-cancel'- Cancel button is hidden; only submit button is shown
+       *
+       * @default show (IE buttons are shown)
+       *
+       */
+      dateTimeButtonsDisplay:{
+        type: String,
+        value: 'show-all',
+        notify: true
+      },
+      /**TODO update doc
+       * String to decide whether to show or hide apply and cancel buttons in the range fields
+       * - 'show' - Buttons are shown at all times
+       * - 'onfocus'- Buttons are not visible
+       * - 'hide' - Submit button is hidden; only cancel button is shown
+       *
+       * @default show (IE buttons are shown)
+       *
+       */
+      rangeFieldButtonsDisplay:{
+        type: String,
+        value: 'show',
+        notify: true
+      },
+      /**TODO update doc
+       * String to decide whether to show or hide apply and cancel buttons in the range fields
+       * - 'show' - Buttons are shown at all times
+       * - 'onfocus'- Buttons are not visible
+       * - 'hide' - Submit button is hidden; only cancel button is shown
+       *
+       * @default show (IE buttons are shown)
+       *
+       */
+      autoSubmit:{
+        type: Boolean,
+        value: false
+      }
+    },
 
-        /**
-         * Properties block, expose attribute values to the DOM via 'reflect'
-         *
-         * @property properties
-         * @type Object
-         */
-        properties: {
-            counterValue: {
-                type: Number,
-                reflect: true
-            }
-        },
+    behaviors: [
+      pxDatetimeCommon,
+      pxDatetimeRangeCommon,
+      validate
+    ],
 
-        /**
-         * Handles click on the element defined in 'on-click' on the template
-         *
-         * @method handleClick
-         */
-        handleClick: function(event, detail, sender) {
-            this.increment();
-        },
+    observers: [
+      '_validateRangeAndBroadcastChanges(fromMoment, toMoment, allFieldsValid)',
+      '_allFieldsValid( validStartDate, validStartTime, validEndDate, validEndTime )',
+      '_setRange(range)'
+    ],
 
-        /**
-         * Increments the counter
-         *
-         * @method increment
-         */
-        increment: function () {
-            this.counterValue++;
+    ready: function() {
+      this.listen(this, 'px-focused-range-field', '_focusedRange');
+      this.listen(this, 'date-time-button', '_dateTimeButtons');
+      this.listen(this, 'moment-changed', '_addChangedClasses');
+    },
+
+    //if rangeFieldButtonsDisplay equals onfocus, hide the buttons on load
+    _addHiddenClass: function(rangeFieldButtonsDisplay){
+      if(rangeFieldButtonsDisplay === 'onfocus'){
+        return 'visuallyhidden';
+      }
+      return '';
+    },
+
+    //if rangeFieldButtonsDisplay is set to 'hide', do not display the <px-date-time-buttons> tag
+    _showRangeFieldButtons: function(rangeFieldButtonsDisplay){
+      console.log('rangeFieldButtonsDisplay ' + rangeFieldButtonsDisplay)
+      if (rangeFieldButtonsDisplay === 'hide'){
+        return false;
+      }
+      return true;
+    },
+
+    //if dateTimeButtonsDisplay is set to 'cancel', do not display the cancel button
+    _hideSubmitButton: function(dateTimeButtonsDisplay){
+      if (dateTimeButtonsDisplay === 'hide-submit'){
+        console.log("hide-submit");
+        return true;
+      }
+      return false;
+    },
+
+    //if dateTimeButtonsDisplay is set to 'hide', do not display the <px-date-time-buttons> tag
+    _hideCancelButton: function(dateTimeButtonsDisplay){
+      if (dateTimeButtonsDisplay === 'hide-cancel'){
+        return true;
+      }
+      return false;
+    },
+
+    _allFieldsValid: function (vsd, vst, ved, vet) {
+      //this checks that all fields are valid
+      this.set('allFieldsValid', (vsd && vst && ved && vet) );
+    },
+
+    _toggleErrorClasses: function(isError) {
+      this.toggleClass('validation-error', isError, this.$$('#fromFields'));
+      this.toggleClass('validation-error', isError, this.$$('#toFields'));
+    },
+
+    // TODO: enable the moment change, but not applied
+    _addChangedClasses: function(evt) {
+      this.toggleClass('visuallyhidden', false, this.$$('#dtBtns'));
+
+      if(evt.detail.moment===this.toMoment){
+        this.toggleClass('validation-changed', true, this.$$('#toFields'));
+        this.toggleClass('is-focused', true, this.$$('#toFields'));
+      } else {
+        this.toggleClass('validation-changed', true, this.$$('#fromFields'));
+        this.toggleClass('is-focused', true, this.$$('#fromFields'));
+      }
+
+      if(this.autoSubmit){
+        setTimeout(function(){
+          if(this.isSubmitButtonValid){
+            this.fire('date-time-button',{action : true});
+          }
+        }.bind(this),10);
+      }
+      evt.stopPropagation();
+    },
+
+    _removeChangedClasses: function() {
+      this.toggleClass('validation-changed', false, this.$$('#toFields'));
+      this.toggleClass('validation-changed', false, this.$$('#fromFields'));
+      if(this.rangeFieldButtonsDisplay === 'onfocus'){
+        this.toggleClass('visuallyhidden', true, this.$$('#dtBtns'));
+      }
+    },
+
+    _toggleSuccessClasses: function() {
+      this.toggleClass('validation-success', true, this.$$('#fromFields'));
+      this.toggleClass('validation-success', true, this.$$('#toFields'));
+
+      setTimeout(function(){
+        this.toggleClass('validation-success', false, this.$$('#fromFields'));
+        this.toggleClass('validation-success', false, this.$$('#toFields'));
+      }.bind(this),800);
+    },
+
+    /**
+     * Return focus to the range field which was last focused on.
+     */
+    returnLastFocus: function() {
+      this.lastFocusedElement.focus();
+    },
+
+    _focusedRange:function(e){
+      var normalizedEvent = Polymer.dom(e);
+
+      this.lastFocusedElement = normalizedEvent.rootTarget;
+      var toggleFocus = (normalizedEvent.path[1].getAttribute('id') === 'fromFields') ? true : false;
+
+      this._toggleFocusToFrom(toggleFocus);
+
+      // TODO Move to range-field
+      if(this.clearInvaild === 'yes'){
+        var range = this.lastFocusedElement.getElementsByClassName("px-datetime-entry validation-error");
+          if (range.length) {
+            range[0].value = "";
         }
+      }
 
-    });
+      e.stopPropagation();
+    },
+
+    _toggleFocusToFrom: function(isFromFocused) {
+      this.toggleClass('is-focused', isFromFocused, this.$$('#fromFields'));
+      this.toggleClass('is-focused', !isFromFocused, this.$$('#toFields'));
+    },
+
+    _dateTimeButtons:function(e){
+      var normalizedEvent = Polymer.dom(e);
+      //if cancle or submit buttons clicked remove chnged classes
+      this._removeChangedClasses();
+
+      if(normalizedEvent.event.detail.action){
+        this.set('range', {
+          from: this.fromMoment.toISOString(),
+          to: this.toMoment.toISOString()
+        });
+        this._toggleSuccessClasses();
+      } else {
+        // this.returnLastFocus();//not convinced we need
+        this._setRange();
+      }
+      e.stopPropagation();
+    }
+
+  });
 </script>

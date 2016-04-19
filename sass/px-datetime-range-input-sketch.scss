@@ -16,10 +16,12 @@
 
 /*
 THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PREDIX BRANDING
-Predix branding rules go in px-datetime-range-input-predix.scss, not in this file.
+Predix branding rules go in px-rangepicker-predix.scss, not in this file.
 */
 
-
+// Settings
+@import "px-defaults-design/_settings.defaults.scss";
+@import "px-mixins-design/_tools.mixins.scss";
 
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
@@ -30,29 +32,38 @@ Predix branding rules go in px-datetime-range-input-predix.scss, not in this fil
 @import "px-flexbox-design/_base.flexbox.scss";
 @import "px-viewport-design/_base.viewport.scss";
 
+$inuit-enable-validation-states : true;
 
+@import "px-forms-design/_base.forms.scss";
 
-
-
+// Objects
+@import "px-buttons-design/_objects.buttons.scss";
 
 // Component
-.circle {
-  cursor: pointer;
-  user-select: none;
-  box-sizing: content-box; /* Even though we use shadow DOM in this component, Safari insists on bleeding styles through from outside, so reset the resetting of this */
-  border: 1px black dashed;
-  font-size: 2rem;
-  text-align: center;
-  padding: 1.25rem .4rem .4rem .4rem;
-  border-radius: 50%;
+.form {
+  position: relative;
 }
-.counter {
-  display: inline-block;
-  min-width: 6.5rem;
-  height: 3rem;
+
+.text-input {
+  width: auto;
+}
+
+#fromFields,
+#toFields,
+.validation-error,
+.validation-warning,
+.validation-success{
+  transition: .2s;
+}
+
+.validation-changed{
+  border-color: $alert-yellow;
 }
 
 // Trumps
-@import "inuit-clearfix/_trumps.clearfix.scss";
-@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
-@import "px-widths-responsive-design/_trumps.widths-responsive.scss";
+$inuit-enable-margins--tiny     : true;
+$inuit-enable-margins--small    : true;
+$inuit-enable-margins--none     : true;
+$inuit-enable-margins--large      : true;
+
+@import "px-spacing-design/_trumps.spacing.scss";
