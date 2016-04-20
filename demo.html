@@ -47,9 +47,37 @@
 
       <!-- with/without presets -->
       <div style="position: relative;">
+        <h3>Basic</h3>
         <px-datetime-range-field
-          range="{{sampleData.range}}"
-          range-field-buttons-display='show'>
+          range="{{sampleData.range}}">
+        </px-datetime-range-field>
+
+
+        <h3>No cancel buttons</h3>
+        <px-datetime-range-field
+          range='{
+            "from": "2016-03-14T08:00:00Z",
+            "to": "2016-03-18T18:00:00Z"
+          }'
+          datetime-buttons-display='hide-cancel'>
+        </px-datetime-range-field>
+
+        <h3>Buttons hidden until change</h3>
+        <px-datetime-range-field
+          range='{
+            "from": "2016-03-14T08:00:00Z",
+            "to": "2016-03-18T18:00:00Z"
+          }'
+          datetime-buttons-display-option='onfocus'>
+        </px-datetime-range-field>
+
+        <h3>No buttons</h3>
+        <px-datetime-range-field
+          range='{
+            "from": "2016-03-14T08:00:00Z",
+            "to": "2016-03-18T18:00:00Z"
+          }'
+          datetime-buttons-display='hide'>
         </px-datetime-range-field>
       </div>
   </template>

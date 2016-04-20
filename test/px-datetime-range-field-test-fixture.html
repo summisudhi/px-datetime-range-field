@@ -5,24 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web Component Test : Fixture for px-datetime-range-input</title>
 
-    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <!-- web-component-tester automatically provides local copy of brower.js below
-         for any URL ending with "/web-component-tester/browser.js"
-         when wct is run from the command line -->
     <script src="../web-component-tester/browser.js"></script>
+    <script src="../../moment/moment.js"></script>
+
+
     <link rel="import" href="../px-datetime-range-input.html" />
-    <!-- Retain this link for px-theme.html -->
-    <!-- px-theme is needed for WCT to run without errors -->
     <link rel="import" href="../../px-theme/px-theme.html"/>
-    <!-- This script link will contain the generated script for basic wct test cases -->
     <script src="px-datetime-range-input-base-tests.js"></script>
-    <!-- This script link will contain the generated script stub for custom, developer-added test cases -->
     <script src="px-datetime-range-input-custom-tests.js"></script>
   </head>
 
   <body>
     <h3>Web Component Test : Fixture for px-datetime-range-input</h3>
+    <px-datetime-range-input
+      id="basic">
+    </px-datetime-range-input>
+
+    <px-datetime-range-input
+      id="range"
+      range='{"from":"2014-10-11T20:00:00Z", "to":"2014-10-25T22:00:00Z"}'>
+    </px-datetime-range-input>
+
+    <!-- clearInvalid attr -->
     <px-datetime-range-input
       id="clearInvalid"
       clear-invalid="yes">
@@ -32,10 +37,7 @@
       clear-invalid="no">
     </px-datetime-range-input>
 
-    <px-datetime-range-input
-      id="buttonsDisplayShowAll"
-      datetime-buttons-display="show-all"
-    ></px-datetime-range-input>
+    <!-- buttonsDisplay attr -->
     <px-datetime-range-input
       id="buttonsDisplayHideSubmit"
       datetime-buttons-display="hide-submit"
@@ -49,7 +51,17 @@
       datetime-buttons-display="hide-all"
     ></px-datetime-range-input>
 
+    <!-- datetimeButtonsDisplayOption attr -->
+    <px-datetime-range-input
+      id="datetimeButtonsDisplayOptionOnfocus"
+      datetime-buttons-display-option="onfocus"
+    ></px-datetime-range-input>
 
+    <!-- autoSubmit attr -->
+    <px-datetime-range-input
+      id="autoSubmit"
+      auto-submit
+    ></px-datetime-range-input>
 
   </body>
 </html>
