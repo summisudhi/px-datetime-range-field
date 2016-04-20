@@ -23,6 +23,33 @@
 
   <body>
     <h3>Web Component Test : Fixture for px-datetime-range-input</h3>
-    <px-datetime-range-input id="px_datetime_range_input_1"></px-datetime-range-input>
+    <px-datetime-range-input
+      id="clearInvalid"
+      clear-invalid="yes">
+    </px-datetime-range-input>
+    <px-datetime-range-input
+      id="noClearInvalid"
+      clear-invalid="no">
+    </px-datetime-range-input>
+
+    <px-datetime-range-input
+      id="buttonsDisplayShowAll"
+      datetime-buttons-display="show-all"
+    ></px-datetime-range-input>
+    <px-datetime-range-input
+      id="buttonsDisplayHideSubmit"
+      datetime-buttons-display="hide-submit"
+    ></px-datetime-range-input>
+    <px-datetime-range-input
+      id="buttonsDisplayHideCancel"
+      datetime-buttons-display="hide-cancel"
+    ></px-datetime-range-input>
+    <px-datetime-range-input
+      id="buttonsDisplayHideAll"
+      datetime-buttons-display="hide-all"
+    ></px-datetime-range-input>
+
+
+
   </body>
 </html>
