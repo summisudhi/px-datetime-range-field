@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-entry.html"/>
-<link rel="import" href="../px-datetime-common/px-datetime-common.html"/>
-<link rel="import" href="../px-datetime-common/px-datetime-range-common.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-common/validate.html"/>
 <script src="../moment/moment.js"></script>
@@ -78,6 +78,12 @@ Component with all the date/time range fields which are displayed in the range p
 
     is: 'px-datetime-range-field',
 
+    behaviors: [
+      pxDatetimeBehavior,
+      pxDatetimeRangeBehavior,
+      validate
+    ],
+
     properties: {
       /**
        * Boolean set when all field pass validation
@@ -141,12 +147,6 @@ Component with all the date/time range fields which are displayed in the range p
         value: false
       }
     },
-
-    behaviors: [
-      pxDatetimeCommon,
-      pxDatetimeRangeCommon,
-      validate
-    ],
 
     observers: [
       '_validateRangeAndBroadcastChanges(fromMoment, toMoment, allFieldsValid)',
