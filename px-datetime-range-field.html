@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html"/>
+g<link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-entry.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
@@ -169,8 +169,8 @@ Component with all the date/time range fields which are displayed in the range p
      *
      * Checks if the datetimeButtonsDisplayOption value is 'onfocus', if yes it adds visuallyhidden class.
      *
-     * @param {string} datetimeButtonsDisplayOption: dev set option.
-     * @return {string} visuallyhidden class or ''
+     * @param {String} datetimeButtonsDisplayOption: dev set option.
+     * @return {String} visuallyhidden class or ''
      */
     _addHiddenClass: function(datetimeButtonsDisplayOption){
       if(datetimeButtonsDisplayOption.toLowerCase() === 'onfocus'){
@@ -183,7 +183,7 @@ Component with all the date/time range fields which are displayed in the range p
      *
      * Checks if the datetimeButtonsDisplay value is 'hide' or 'hide-all', if yes it returns false.
      *
-     * @param {string} datetimeButtonsDisplay: dev set option.
+     * @param {String} datetimeButtonsDisplay: dev set option.
      * @return {Boolean} to add the buttons or not
      */
     _showRangeFieldButtons: function(datetimeButtonsDisplay){
@@ -197,7 +197,7 @@ Component with all the date/time range fields which are displayed in the range p
      *
      * Checks if the datetimeButtonsDisplay value is 'hide-submit', if yes it passes true to px-datetime-buttons.
      *
-     * @param {string} dateTimeButtonsDisplay: dev set option.
+     * @param {String} dateTimeButtonsDisplay: dev set option.
      * @return {Boolean} to add the submit button or not
      */
     _hideSubmitButton: function(dateTimeButtonsDisplay){
@@ -211,7 +211,7 @@ Component with all the date/time range fields which are displayed in the range p
      *
      * Checks if the datetimeButtonsDisplay value is 'hide-cancel', if yes it passes true to px-datetime-buttons.
      *
-     * @param {string} dateTimeButtonsDisplay: dev set option.
+     * @param {String} dateTimeButtonsDisplay: dev set option.
      * @return {Boolean} to add the cancel button or not
      */
     _hideCancelButton: function(dateTimeButtonsDisplay){
@@ -245,16 +245,15 @@ Component with all the date/time range fields which are displayed in the range p
       this.toggleClass('validation-error', isError, this.$$('#toFields'));
     },
     /**
-     * Called by 'moment-changed' event in validate
-     * The data packet is a moment object
+     * Called in px-datetime-entry by '_handleFocus'
      *
-     * The visuallyhidden class is removed from dtBtns if it was added because datetimeButtonsDisplayOption is 'onfocus'.
+     * Remove visuallyhidden class from dtBtns. This would have been added if datetimeButtonsDisplayOption is 'onfocus'.
      *
-     * Determine which field was change and add validation-changed class to the changed field
+     * Determine which field was changed and add validation-changed class to the changed field
      *
-     * If autoSubmit is true && the entry is valid, call datetime-button-clicked
+     * If autoSubmit is true and the entry is valid, call datetime-button-clicked
      *
-     * @param {string} evt: event object
+     * @param {Event} evt: The data packet is a moment object
      */
     _addChangedClasses: function(evt) {
       // TODO: enable the moment change, but not applied
@@ -277,7 +276,13 @@ Component with all the date/time range fields which are displayed in the range p
       }
       evt.stopPropagation();
     },
-
+    /**
+     * Called by '_dateTimeButtons' event.
+     *
+     * Remove validation-changed class from both fields
+     *
+     * If datetimeButtonsDisplayOption is 'onfocus', hide the buttons
+     */
     _removeChangedClasses: function() {
       this.toggleClass('validation-changed', false, this.$$('#toFields'));
       this.toggleClass('validation-changed', false, this.$$('#fromFields'));
@@ -285,7 +290,13 @@ Component with all the date/time range fields which are displayed in the range p
         this.toggleClass('visuallyhidden', true, this.$$('#dtBtns'));
       }
     },
-
+    /**
+     * Called by '_dateTimeButtons' event after the range is set.
+     *
+     * Add 'validation-success' class to both fields.
+     *
+     * If datetimeButtonsDisplayOption is 'onfocus', hide the buttons
+     */
     _toggleSuccessClasses: function() {
       this.toggleClass('validation-success', true, this.$$('#fromFields'));
       this.toggleClass('validation-success', true, this.$$('#toFields'));
@@ -295,25 +306,32 @@ Component with all the date/time range fields which are displayed in the range p
         this.toggleClass('validation-success', false, this.$$('#toFields'));
       }.bind(this),800);
     },
-
     /**
-     * Return focus to the range field which was last focused on.
+     * Return focus to the field which was last focused on.
      */
     returnLastFocus: function() {
       this.lastFocusedElement.focus();
     },
-
+    /**
+     * Called in px-datetime-entry by '_handleFocus'
+     *
+     * Determine if the 'fromFields' is the field in focus.
+     *
+     * Trigger '_toggleFocusToFrom' with the result.
+     *
+     * If 'clearInvalid' is yes, check to see if the entry is invalid. If so delete the entry.
+     *
+     * @param {Event} e event object
+     */
     _focusedRange:function(e){
       var normalizedEvent = Polymer.dom(e);
 
-      this.lastFocusedElement = normalizedEvent.rootTarget;
       var toggleFocus = (normalizedEvent.path[1].getAttribute('id') === 'fromFields') ? true : false;
-
       this._toggleFocusToFrom(toggleFocus);
 
-      // TODO Move to range-field
+      this.lastFocusedElement = normalizedEvent.rootTarget;
       if(this.clearInvalid === 'yes'){
-        var range = this.lastFocusedElement.getElementsByClassName("px-datetime-entry validation-error");
+        var range = this.lastFocusedElement.getElementsByClassName("validation-error");
           if (range.length) {
             range[0].value = "";
         }
@@ -321,25 +339,44 @@ Component with all the date/time range fields which are displayed in the range p
 
       e.stopPropagation();
     },
-
+    /**
+     * Called by '_focusedRange'
+     *
+     * Determine which field need to turn 'is-focus' class on or off based on boolean
+     *
+     * @param {Boolean} isFromFocused
+     */
     _toggleFocusToFrom: function(isFromFocused) {
       this.toggleClass('is-focused', isFromFocused, this.$$('#fromFields'));
       this.toggleClass('is-focused', !isFromFocused, this.$$('#toFields'));
     },
-
+    /**
+     * Event handler.
+     * Trigged from px-datetime-entry and px-datetime-buttons when cancel, submit, esc, or enter are clicked
+     *
+     * Calls _removeChangedClasses
+     *
+     * If action is true, set 'range' to toMoment and fromMoment.
+     * Calls _toggleSuccessClasses
+     *
+     * If not, reset the fields to last submitted dates.
+     *
+     * @param {Event} e event object
+     */
     _dateTimeButtons:function(e){
       var normalizedEvent = Polymer.dom(e);
-      //if cancle or submit buttons clicked remove chnged classes
+
       this._removeChangedClasses();
 
       if(normalizedEvent.event.detail.action){
+
         this.set('range', {
           from: this.fromMoment.toISOString(),
           to: this.toMoment.toISOString()
         });
         this._toggleSuccessClasses();
       } else {
-        // this.returnLastFocus();//not convinced we need
+        // this.returnLastFocus(); //not convinced we need
         this._setRange();
       }
       e.stopPropagation();
