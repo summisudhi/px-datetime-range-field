@@ -3,65 +3,65 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Web Component Test : Fixture for px-datetime-range-input</title>
+    <title>Web Component Test : Fixture for px-datetime-range-field</title>
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="../web-component-tester/browser.js"></script>
     <script src="../../moment/moment.js"></script>
 
 
-    <link rel="import" href="../px-datetime-range-input.html" />
+    <link rel="import" href="../px-datetime-range-field.html" />
     <link rel="import" href="../../px-theme/px-theme.html"/>
-    <script src="px-datetime-range-input-base-tests.js"></script>
-    <script src="px-datetime-range-input-custom-tests.js"></script>
+    <script src="px-datetime-range-field-base-tests.js"></script>
+    <script src="px-datetime-range-field-custom-tests.js"></script>
   </head>
 
   <body>
-    <h3>Web Component Test : Fixture for px-datetime-range-input</h3>
-    <px-datetime-range-input
+    <h3>Web Component Test : Fixture for px-datetime-range-field</h3>
+    <px-datetime-range-field
       id="basic">
-    </px-datetime-range-input>
+    </px-datetime-range-field>
 
-    <px-datetime-range-input
+    <px-datetime-range-field
       id="range"
       range='{"from":"2014-10-11T20:00:00Z", "to":"2014-10-25T22:00:00Z"}'>
-    </px-datetime-range-input>
+    </px-datetime-range-field>
 
     <!-- clearInvalid attr -->
-    <px-datetime-range-input
+    <px-datetime-range-field
       id="clearInvalid"
       clear-invalid="yes">
-    </px-datetime-range-input>
-    <px-datetime-range-input
+    </px-datetime-range-field>
+    <px-datetime-range-field
       id="noClearInvalid"
       clear-invalid="no">
-    </px-datetime-range-input>
+    </px-datetime-range-field>
 
     <!-- buttonsDisplay attr -->
-    <px-datetime-range-input
+    <px-datetime-range-field
       id="buttonsDisplayHideSubmit"
       datetime-buttons-display="hide-submit"
-    ></px-datetime-range-input>
-    <px-datetime-range-input
+    ></px-datetime-range-field>
+    <px-datetime-range-field
       id="buttonsDisplayHideCancel"
       datetime-buttons-display="hide-cancel"
-    ></px-datetime-range-input>
-    <px-datetime-range-input
+    ></px-datetime-range-field>
+    <px-datetime-range-field
       id="buttonsDisplayHideAll"
       datetime-buttons-display="hide-all"
-    ></px-datetime-range-input>
+    ></px-datetime-range-field>
 
     <!-- datetimeButtonsDisplayOption attr -->
-    <px-datetime-range-input
+    <px-datetime-range-field
       id="datetimeButtonsDisplayOptionOnfocus"
       datetime-buttons-display-option="onfocus"
-    ></px-datetime-range-input>
+    ></px-datetime-range-field>
 
     <!-- autoSubmit attr -->
-    <px-datetime-range-input
+    <px-datetime-range-field
       id="autoSubmit"
       auto-submit
-    ></px-datetime-range-input>
+    ></px-datetime-range-field>
 
   </body>
 </html>

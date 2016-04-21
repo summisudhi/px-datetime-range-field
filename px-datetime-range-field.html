@@ -100,7 +100,7 @@ Component with all the date/time range fields which are displayed in the range p
        *
        * @default yes
        */
-      clearInvaild:{
+      clearInvalid:{
         type:String,
         value:'yes'
       },
@@ -215,7 +215,6 @@ Component with all the date/time range fields which are displayed in the range p
      * @return {Boolean} to hide or show cancel button
      */
     _hideCancelButton: function(dateTimeButtonsDisplay){
-      console.log(dateTimeButtonsDisplay);
       if (dateTimeButtonsDisplay.toLowerCase() === 'hide-cancel'){
         return true;
       }
@@ -309,7 +308,7 @@ Component with all the date/time range fields which are displayed in the range p
       this._toggleFocusToFrom(toggleFocus);
 
       // TODO Move to range-field
-      if(this.clearInvaild === 'yes'){
+      if(this.clearInvalid === 'yes'){
         var range = this.lastFocusedElement.getElementsByClassName("px-datetime-entry validation-error");
           if (range.length) {
             range[0].value = "";
