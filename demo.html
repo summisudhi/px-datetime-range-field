@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html>
 <head>
   <meta charset="utf-8">
@@ -23,7 +22,9 @@
 
 <body>
 
-  <h3>Demo</h3>
+  <h2>px-datetime-range-field Demo</h2>
+  <br />
+  <br />
 
   <!-- Wrap elements with auto-binding template to -->
   <!-- allow use of Polymer bindings in main document -->
@@ -42,43 +43,42 @@
       <!-- <button onclick="change2014()">Change to Nov/Dec 2014</button>
       <button onclick="change2013()">Change to March/April 2013</button> -->
 
-      <br />
-      <br />
-
       <!-- with/without presets -->
       <div style="position: relative;">
         <h3>Basic</h3>
         <px-datetime-range-field
           range="{{sampleData.range}}">
         </px-datetime-range-field>
+        <br />
 
-
-        <h3>No cancel buttons</h3>
+        <!-- <h3>No cancel buttons</h3>
         <px-datetime-range-field
           range='{
-            "from": "2016-03-14T08:00:00Z",
-            "to": "2016-03-18T18:00:00Z"
+            "from": "2016-04-05T08:00:00Z",
+            "to": "2016-04-07T18:00:00Z"
           }'
           datetime-buttons-display='hide-cancel'>
         </px-datetime-range-field>
+        <br />
 
         <h3>Buttons hidden until change</h3>
         <px-datetime-range-field
           range='{
-            "from": "2016-03-14T08:00:00Z",
-            "to": "2016-03-18T18:00:00Z"
+            "from": "2016-03-04T08:00:00Z",
+            "to": "2016-03-11T18:00:00Z"
           }'
           datetime-buttons-display-option='onfocus'>
         </px-datetime-range-field>
+        <br />
 
         <h3>No buttons</h3>
         <px-datetime-range-field
           range='{
-            "from": "2016-03-14T08:00:00Z",
-            "to": "2016-03-18T18:00:00Z"
+            "from": "2016-01-14T03:00:00Z",
+            "to": "2016-02-18T17:00:00Z"
           }'
           datetime-buttons-display='hide'>
-        </px-datetime-range-field>
+        </px-datetime-range-field> -->
       </div>
   </template>
 
