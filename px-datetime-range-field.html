@@ -167,10 +167,10 @@ Component with all the date/time range fields which are displayed in the range p
     /**
      * Helper function for px-datetime-buttons.html class attribute:
      *
-     * Checks the datetimeButtonsDisplayOption value to see if it is onfocus and adds visuallyhidden class if true.
+     * Checks if the datetimeButtonsDisplayOption value is 'onfocus', if yes it adds visuallyhidden class.
      *
-     * @param {string} datetimeButtonsDisplayOption: the dev set option.
-     * @return {string} The visuallyhidden class or ''
+     * @param {string} datetimeButtonsDisplayOption: dev set option.
+     * @return {string} visuallyhidden class or ''
      */
     _addHiddenClass: function(datetimeButtonsDisplayOption){
       if(datetimeButtonsDisplayOption.toLowerCase() === 'onfocus'){
@@ -181,10 +181,10 @@ Component with all the date/time range fields which are displayed in the range p
     /**
      * Helper function for dom-if:
      *
-     * Checks the datetimeButtonsDisplay value to see if it is hide or hide-all, doesn't show if true.
+     * Checks if the datetimeButtonsDisplay value is 'hide' or 'hide-all', if yes it returns false.
      *
-     * @param {string} datetimeButtonsDisplay: the dev set option.
-     * @return {Boolean} to hide or show buttons
+     * @param {string} datetimeButtonsDisplay: dev set option.
+     * @return {Boolean} to add the buttons or not
      */
     _showRangeFieldButtons: function(datetimeButtonsDisplay){
       if (datetimeButtonsDisplay.toLowerCase() === 'hide' || datetimeButtonsDisplay.toLowerCase() === 'hide-all'){
@@ -195,10 +195,10 @@ Component with all the date/time range fields which are displayed in the range p
     /**
      * Helper function setting attribute on px-datetime-buttons:
      *
-     * Checks the datetimeButtonsDisplay value to see if it is hide-submit and passes true to px-datetime-buttons
+     * Checks if the datetimeButtonsDisplay value is 'hide-submit', if yes it passes true to px-datetime-buttons.
      *
-     * @param {string} dateTimeButtonsDisplay: the dev set option.
-     * @return {Boolean} to hide or show submit button
+     * @param {string} dateTimeButtonsDisplay: dev set option.
+     * @return {Boolean} to add the submit button or not
      */
     _hideSubmitButton: function(dateTimeButtonsDisplay){
       if (dateTimeButtonsDisplay.toLowerCase() === 'hide-submit'){
@@ -209,10 +209,10 @@ Component with all the date/time range fields which are displayed in the range p
     /**
      * Helper function setting attribute on px-datetime-buttons:
      *
-     * Checks the datetimeButtonsDisplay value to see if it is hide-cancel and passes true to px-datetime-buttons
+     * Checks if the datetimeButtonsDisplay value is 'hide-cancel', if yes it passes true to px-datetime-buttons.
      *
-     * @param {string} dateTimeButtonsDisplay: the dev set option.
-     * @return {Boolean} to hide or show cancel button
+     * @param {string} dateTimeButtonsDisplay: dev set option.
+     * @return {Boolean} to add the cancel button or not
      */
     _hideCancelButton: function(dateTimeButtonsDisplay){
       if (dateTimeButtonsDisplay.toLowerCase() === 'hide-cancel'){
@@ -223,7 +223,7 @@ Component with all the date/time range fields which are displayed in the range p
     /**
      * Observer fuction:
      *
-     * Checks that all params are true then sets allFieldsValid to true
+     * Checks if all params are true then sets allFieldsValid to true
      *
      * @param {Boolean} vsd: validStartDate
      * @param {Boolean} vst: validStartTime
@@ -231,11 +231,10 @@ Component with all the date/time range fields which are displayed in the range p
      * @param {Boolean} vet: validEndTime
      */
     _allFieldsValid: function (vsd, vst, ved, vet) {
-      //this checks that all fields are valid
       this.set('allFieldsValid', (vsd && vst && ved && vet) );
     },
     /**
-     * Being called in validate
+     * Called in validate
      *
      * Turns validation classes on and off for fromFields and toFields
      *
@@ -246,14 +245,19 @@ Component with all the date/time range fields which are displayed in the range p
       this.toggleClass('validation-error', isError, this.$$('#toFields'));
     },
     /**
-     * Called by 'moment-changed' event
+     * Called by 'moment-changed' event in validate
+     * The data packet is a moment object
      *
-     * START
+     * The visuallyhidden class is removed from dtBtns if it was added because datetimeButtonsDisplayOption is 'onfocus'.
      *
-     * @param {Boolean} isError
+     * Determine which field was change and add validation-changed class to the changed field
+     *
+     * If autoSubmit is true && the entry is valid, call datetime-button-clicked
+     *
+     * @param {string} evt: event object
      */
-    // TODO: enable the moment change, but not applied
     _addChangedClasses: function(evt) {
+      // TODO: enable the moment change, but not applied
       this.toggleClass('visuallyhidden', false, this.$$('#dtBtns'));
 
       if(evt.detail.moment===this.toMoment){
