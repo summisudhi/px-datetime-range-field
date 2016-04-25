@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>px-datetime-range-field Demo</title>
+  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <link rel="import" href="../px-theme/px-theme.html"/>
+  <link rel="import" href="px-datetime-range-field.html"/>
+  <!-- <link rel="import" href="../polymer/polymer.html"/> -->
+
+  <link rel="import" href="../iron-ajax/iron-ajax.html"/>
+
+  <style>
+    html {
+      font-size: 0.9375rem;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h2>px-datetime-range-field Demo</h2>
+  <br />
+  <br />
+
+  <!-- Wrap elements with auto-binding template to -->
+  <!-- allow use of Polymer bindings in main document -->
+  <template id="just-for-demo" is="dom-bind">
+
+    <iron-ajax
+      auto
+      url="demo-data/sample-data.json"
+      last-response="{{sampleData}}"
+      handle-as="json"></iron-ajax>
+
+
+
+      <!-- <button onclick="change2014()">Change to Nov/Dec 2014</button>
+      <button onclick="change2013()">Change to March/April 2013</button> -->
+
+      <!-- with/without presets -->
+      <div style="position: relative;">
+        <h3>Basic</h3>
+        <div>
+          Basic Range is from <b>{{sampleData.range.from}}</b> to <b>{{sampleData.range.to}}</b>
+        </div>
+        <br />
+        <px-datetime-range-field
+          range='{{sampleData.range}}'>
+        </px-datetime-range-field>
+        <br />
+        <br />
+
+        <h3>No cancel buttons</h3>
+        <px-datetime-range-field
+          range= '{
+            "from": "2016-04-05T08:00:00Z",
+            "to": "2016-04-07T18:00:00Z"
+          }'
+          datetime-buttons-display='hide-cancel'>
+        </px-datetime-range-field>
+        <br />
+        <br />
+
+        <h3>Buttons hidden until change</h3>
+        <px-datetime-range-field
+          range='{
+            "from": "2016-03-04T08:00:00Z",
+            "to": "2016-03-11T18:00:00Z"
+          }'
+          datetime-buttons-display-option='onfocus'>
+        </px-datetime-range-field>
+        <br />
+        <br />
+
+        <h3>No buttons</h3>
+        <px-datetime-range-field
+          range='{
+            "from": "2016-01-14T03:00:00Z",
+            "to": "2016-02-18T17:00:00Z"
+          }'
+          datetime-buttons-display='hide'>
+        </px-datetime-range-field>
+        <br />
+        <br />
+
+        <h3>Auto Update</h3>
+        <div>
+          Auto Update UTC Range is from <b>{{rangeAuto.from}}</b> to <b>{{rangeAuto.to}}</b>
+        </div>
+        <br />
+        <px-datetime-range-field id="rangeA"
+          range='{{rangeAuto}}'
+          datetime-buttons-display='hide'
+          auto-submit='true'
+          is-utc >
+        </px-datetime-range-field>
+      </div>
+  </template>
+  <script type="text/javascript">
+
+  document.addEventListener('WebComponentsReady', function() {
+    var rangeAuto = Polymer.dom(document).querySelector('#rangeA');
+    rangeAuto.set(
+        'range',
+        {
+        "from": "2015-12-14T02:00:00Z",
+        "to": "2016-02-11T15:00:00Z"
+        }
+     )
+  });
+
+  </script>
+</body>
+</html>
