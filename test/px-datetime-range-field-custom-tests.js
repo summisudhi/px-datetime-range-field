@@ -16,6 +16,7 @@ function runCustomTests() {
   runRangeTests();
   runButtonsTests();
   runAutoSubmitTests();
+  runUtc();
 };
 
 function runBasicTests(now, weekAgo){
@@ -328,13 +329,29 @@ function runAutoSubmitTests(){
   suite('it auto submitted',function(){
     test('from updated',function(done){
       var assertions = function(){
-        assert.equal(autoSubmit.range.from, "2013-06-04T20:00:00.000Z");
+        assert.equal(autoSubmit.range.from, "2013-06-04T23:00:00.000Z");
         done();
       };
 
-      setTimeout(function(){
-        assertions();
-      },501);
+      setTimeout(assertions, 501);
+    });
+  });
+}
+
+function runUtc(){
+  var hasUtc = document.getElementById('hasUtc');
+  checkIfElemExists(hasUtc,'hasUtc');
+
+  suite('it is utc',function(){
+    test('time input correct',function(){
+      var fromTime = hasUtc.$.fromTime
+      var dtImport = fromTime.$.dtImport
+      assert.equal(dtImport.value, "11:00:00 PM");
+    });
+
+    test('moment has _isUTC true',function(){
+      var fromTime = hasUtc.$.fromTime
+      assert.isTrue(fromTime.moment._isUTC);
     });
   });
 }
