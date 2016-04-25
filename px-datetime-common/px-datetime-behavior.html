@@ -1,0 +1,122 @@
+<script src="../moment/moment.js"></script>
+
+<script>
+
+/*
+  Name:
+  pxDatetimeBehavior
+
+  Description:
+  blah blah blah
+  TODO
+
+  Dependencies: momentjs
+
+  @polymerBehavior pxDatetimeBehavior
+
+*/
+
+var pxDatetimeBehavior = {
+
+  properties: {
+    /**
+     * (optional)
+     *
+     * Set this attribute when you do want to allow future dates in the px-date-panel component.
+     * This only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+     *
+     * @default false (future dates will be disabled and unclickable in the date-panel)
+     */
+    allowFutureDates: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * (optional)
+     *
+     * Changes text on the submit button in px-datetime-buttons
+     *
+     *```
+     *   {
+     *     "submitButtonText": " Click Here",
+     *     "submitButtonIcon": "fa fa-hand-pointer-o"
+     *   }
+     * ```
+     *
+     */
+    displayOptions: {
+      type: Object,
+      value: {
+        submitButtonText: 'Apply',
+        submitButtonIcon: ''
+      }
+    },
+
+    /**
+     * (optional)
+     *
+     * The preset date/times to be displayed in the panel.  Defaults to: Today, 7 days Ago, 1 Year Ago
+     *
+     *```
+     *   [
+     *    {
+     *      "displayText": "5 Minutes Ago",
+     *      "dateTime": "2013-02-04T22:44:30.652Z",
+     *    },
+     *    {
+     *      "displayText": "12 Hours Ago",
+     *      "dateTime": "2013-02-04T10:44:30.652Z",
+     *    }
+     *   ]
+     * ```
+     *
+     * @default no presets
+     */
+    presets: Object,
+
+    /**
+     * A flag set in validate. Determines if the entry is valid and can be submitted.
+     * If validation fails then isSubmitButtonValid is false; the user can not submit the entry.
+     * @private
+     */
+    isSubmitButtonValid: {
+      type: Boolean,
+      value: true,
+      notify: true
+    },
+
+    /**
+     * (optional)
+     *
+     * By default, px-datetime components will display the time in your browser's timezone.  If you add
+     * the is-utc attribute it will display the time as a UTC (GMT timezone) time.
+     *
+     * @default false
+     */
+    isUtc: {
+      type: Boolean,
+      value: false
+    }
+
+  }, //properties close bracket
+
+  /**
+   * Takes an ISO 8601 String and returns a moment object
+   *
+   * @param {String} timeString
+   */
+  _convertISOtoMoment: function(timeString) {
+    if(this.isUtc) {
+      return moment.utc(timeString, moment.ISO_8601);
+    }
+    else {
+      return moment(timeString, moment.ISO_8601);
+    }
+  },
+
+}; //pxDatetimeBehavior close bracket
+
+
+
+</script>

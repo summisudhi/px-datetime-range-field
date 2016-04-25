@@ -1,0 +1,40 @@
+{
+  "name": "px-datetime-common",
+  "main": [
+    "px-datetime-common.html"
+  ],
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "Gruntfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+    "moment": "~2.10.6",
+    "polymer": "~1.2.3",
+    "px-theme": "https://github.com/PredixDev/px-theme.git#~0.4.0",
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#~1.1.0",
+    "px-calendar": "https://github.com/PredixDev/px-calendar.git"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.1.0",
+    "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9",
+    "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.20",
+    "px-forms-design": "https://github.com/PredixDev/px-forms-design.git#~0.3.0",
+    "px-list-bare-design": "https://github.com/PredixDev/px-list-bare-design.git#~0.2.0",
+    "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0"
+  },
+  "homepage": "https://github.com/PredixDev/px-datetime-common",
+  "_release": "89c192483c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "89c192483c1a54af50151c4ac6a5400ebe4d372f"
+  },
+  "_source": "https://github.com/PredixDev/px-datetime-common.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/PredixDev/px-datetime-common.git"
+}

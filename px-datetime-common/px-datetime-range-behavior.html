@@ -1,0 +1,130 @@
+<script src="../moment/moment.js"></script>
+
+<script>
+
+/*
+  Name:
+  pxDatetimeRangeBehavior
+
+  Description:
+  blah blah blah
+
+  Dependencies:momentjs
+
+  @polymerBehavior pxDatetimeRangeBehavior
+*/
+
+var pxDatetimeRangeBehavior = {
+
+  properties: {
+
+    /**
+     * (optional)
+     *
+     * The preset date/time ranges to be displayed.
+     *
+     *```
+     *   [
+     *    {
+     *      "displayText": "Last 5 Minutes",
+     *      "startDateTime": "2013-02-04T22:44:30.652Z",
+     *      "endDateTime": "2013-02-04T22:49:30.652Z"
+     *    },
+     *    {
+     *      "displayText": "Last 12 Hours",
+     *      "startDateTime": "2013-02-04T10:44:30.652Z",
+     *      "endDateTime": "2013-02-04T22:49:30.652Z"
+     *    }
+     *   ]
+     * ```
+     *
+     * @default no presetRanges
+     */
+    presetRanges: Object, //may be useless
+
+    /**
+     * This is the object you use to instantiate px-datetime components and retrive it through 2-way data-binding
+     *
+     * Format ISO8601 strings
+     * ```
+     * {
+     *    "from": "2013-01-07T22:44:30.652Z",
+     *    "to" : "2013-02-04T22:44:30.652Z"
+     * }
+     * ```
+     *
+     * This object which will be changed when the user Submits their new selected range.
+     *
+     * @default the last 7 days
+     */
+    range: {
+      type: Object,
+      notify: true,
+      reflectToAttribute: true, // need both notify & reflectToAttribute for bind-polymer to work
+      value: function() {
+        return {
+          from: moment().subtract(7, 'day').toISOString(),
+          to: moment().toISOString()
+        };
+      }
+    },
+
+    /**
+     * Moment object start date & time
+     *
+     * This is the working copy moment object for px-rangepicker, px-datetime-range-field and px-datetime-entry
+     *
+     * used in '_setRange' to set 'range'
+     */
+    fromMoment: {
+      type: Object,
+      notify: true
+    },
+
+    /**
+     * Moment object end date & time
+     *
+     * This is the working copy moment object for px-rangepicker, px-datetime-range-field and px-datetime-entry
+     *
+     * used in '_setRange' to set 'range'
+     */
+    toMoment: {
+      type: Object,
+      notify: true
+    },
+    /**
+     * Helper attribute passed down by px-datetime components
+     *
+     * Used by px-calendar
+     */
+    firstRangeDate: {
+      type: Object,
+      notify: true
+    },
+    /**
+     * Helper attribute passed down by px-datetime components
+     *
+     * Used by px-calendar
+     */
+    secondRangeDate: {
+      type: Object,
+      notify: true
+    },
+
+  }, //properties close bracket
+
+  /**
+   * Coverts 'toMoment' and 'fromMoment' to ISO8601 strings, then set the range with the strings.
+   *
+   * Triggered from click on cancel, submit, esc, or enter
+   */
+  _setRange: function() {
+    // set to and from based on inputed range
+    this.set('fromMoment', this._convertISOtoMoment(this.range.from));
+    this.set('toMoment', this._convertISOtoMoment(this.range.to));
+  }
+}; //pxRangeCommon close bracket
+
+
+
+</script>
