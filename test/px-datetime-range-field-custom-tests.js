@@ -114,7 +114,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Applying a new datetime', function() {
-    updateDate(basic,'fromDate Test Applying a new datetime','05/04/2013','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate','05/04/2013','MM/DD/YYYY','from', 'Test Applying a new datetime');
     applyDate(basic,'fromDate','from');
 
     updateDate(basic,'fromTime','12:00:00 PM','hh:mm:ss A','from');
@@ -139,7 +139,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Canceling a new datetime', function() {
-    updateDate(basic,'fromDate Test Canceling a new datetime','06/04/2013','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate','06/04/2013','MM/DD/YYYY','from', 'Test Canceling a new datetime');
     cancelDate(basic,'fromDate','from');
 
     updateDate(basic,'fromTime','01:00:00 PM','hh:mm:ss A','from');
@@ -153,7 +153,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Canceling a new datetime', function() {
-    updateDate(basic,'fromDate Test Canceling a new datetime','05/04/2016','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from', 'Test Canceling a new datetime');
     invalidDate(basic,'fromDate','from');
 
     updateDate(basic,'toDate','10/14/2012','MM/DD/YYYY','to');
@@ -161,11 +161,11 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test keyboard events', function() {
-    updateDate(basic,'fromDate Test keyboard events','05/04/2016','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from', 'Test keyboard events');
     invalidDate(basic,'fromDate','from');
     escDate(basic,'fromDate','from');
 
-    updateDate(basic,'fromDate Test keyboard events2','05/04/2010','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate','05/04/2010','MM/DD/YYYY','from', 'Test keyboard events2');
     enterDate(basic,'fromDate','from');
 
     suite('Wait until success class clears', function() {
@@ -363,8 +363,8 @@ function checkIfElemExists(elem,str) {
   });
 }
 
-function updateDate(parent, elem, date, format, field){
-  suite('Update ' + elem, function() {
+function updateDate(parent, elem, date, format, field, log){
+  suite('Update ' + elem + ' ' + log, function() {
     var elemDate = Polymer.dom(parent.root).querySelector('#'+elem);
     var elemDiv = Polymer.dom(parent.root).querySelector('#'+field+'Fields');
 
@@ -377,7 +377,7 @@ function updateDate(parent, elem, date, format, field){
       assert.equal(elemDate.moment.format(format),date);
     });
 
-    test('added changed class',function(done){
+    test('added changed class',function(){
       assert.isTrue(elemDiv.classList.contains('validation-changed'));
     });
   });
