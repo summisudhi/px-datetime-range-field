@@ -2,14 +2,12 @@
 
 <script>
 
-/*
-  Name:
-  pxDatetimeRangeBehavior
+/**
+  ```pxDatetimeRangeBehavior```
 
-  Description:
-  blah blah blah
+  This behavior is for all ```px-{datetime}-range-{picker}``` components.
 
-  Dependencies:momentjs
+  Dependencies: momentjs
 
   @polymerBehavior pxDatetimeRangeBehavior
 */
@@ -19,7 +17,7 @@ var pxDatetimeRangeBehavior = {
   properties: {
 
     /**
-     * (optional)
+     * (optional:  'px-{datetime}-range-panel')
      *
      * The preset date/time ranges to be displayed.
      *
@@ -43,6 +41,8 @@ var pxDatetimeRangeBehavior = {
     presetRanges: Object, //may be useless
 
     /**
+     * (required: 'px-{datetime}-range-{picker}')
+     *
      * This is the object you use to instantiate px-datetime components and retrive it through 2-way data-binding
      *
      * Format ISO8601 strings
@@ -72,9 +72,11 @@ var pxDatetimeRangeBehavior = {
     /**
      * Moment object start date & time
      *
-     * This is the working copy moment object for px-rangepicker, px-datetime-range-field and px-datetime-entry
+     * This is the working copy moment object for 'px-rangepicker', 'px-datetime-range-field' and 'px-datetime-entry'
      *
      * used in '_setRange' to set 'range'
+     *
+     * @private
      */
     fromMoment: {
       type: Object,
@@ -84,27 +86,33 @@ var pxDatetimeRangeBehavior = {
     /**
      * Moment object end date & time
      *
-     * This is the working copy moment object for px-rangepicker, px-datetime-range-field and px-datetime-entry
+     * This is the working copy moment object for 'px-rangepicker', 'px-datetime-range-field' and 'px-datetime-entry'
      *
      * used in '_setRange' to set 'range'
+     *
+     * @private
      */
     toMoment: {
       type: Object,
       notify: true
     },
     /**
+     * (px-calendar)
+     *
      * Helper attribute passed down by px-datetime components
      *
-     * Used by px-calendar
+     * @private
      */
     firstRangeDate: {
       type: Object,
       notify: true
     },
     /**
+     * (px-calendar)
+     *
      * Helper attribute passed down by px-datetime components
      *
-     * Used by px-calendar
+     * @private
      */
     secondRangeDate: {
       type: Object,
@@ -116,7 +124,7 @@ var pxDatetimeRangeBehavior = {
   /**
    * Coverts 'toMoment' and 'fromMoment' to ISO8601 strings, then set the range with the strings.
    *
-   * Triggered from click on cancel, submit, esc, or enter
+   * Triggered from a click on cancel, submit, esc, or enter
    */
   _setRange: function() {
     // set to and from based on inputed range

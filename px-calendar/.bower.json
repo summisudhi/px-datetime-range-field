@@ -24,11 +24,11 @@
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9"
   },
   "homepage": "https://github.com/PredixDev/px-calendar",
-  "_release": "05f9dd96bf",
+  "_release": "9f9cc3b351",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "05f9dd96bf8a0681732ad10a0398d34807a76a0a"
+    "commit": "9f9cc3b351088f3bc21d49784b81d28e3d596488"
   },
   "_source": "https://github.com/PredixDev/px-calendar.git",
   "_target": "*",

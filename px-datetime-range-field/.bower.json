@@ -1,5 +1,6 @@
 {
   "name": "px-datetime-range-field",
+  "version": "0.0.1",
   "main": [
     "px-datetime-range-field.html"
   ],
@@ -24,15 +25,15 @@
     "px-forms-design": "https://github.com/PredixDev/px-forms-design.git#~0.3.0",
     "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0"
   },
-  "homepage": "https://github.com/PredixDev/px-datetime-range-field",
-  "_release": "36653992c1",
+  "homepage": "https://github.com/predixdev/px-datetime-range-field",
+  "_release": "0.0.1",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "36653992c17f5cb70ac744fb2ab8fec395e0e518"
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "c9a89544be2996688d1257f95d1fb6f246c3e418"
   },
-  "_source": "https://github.com/PredixDev/px-datetime-range-field.git",
-  "_target": "*",
-  "_originalSource": "https://github.com/PredixDev/px-datetime-range-field.git",
+  "_source": "https://github.com/predixdev/px-datetime-range-field.git",
+  "_target": "0.0.1",
+  "_originalSource": "https://github.com/predixdev/px-datetime-range-field.git",
   "_direct": true
 }

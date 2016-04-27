@@ -28,11 +28,11 @@
     "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0"
   },
   "homepage": "https://github.com/PredixDev/px-datetime-common",
-  "_release": "89c192483c",
+  "_release": "5a453f9797",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "89c192483c1a54af50151c4ac6a5400ebe4d372f"
+    "commit": "5a453f9797af27c2021f12a8a7088fc69bc84db1"
   },
   "_source": "https://github.com/PredixDev/px-datetime-common.git",
   "_target": "*",
