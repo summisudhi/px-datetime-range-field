@@ -165,7 +165,7 @@ function runBasicTests(now, weekAgo){
     invalidDate(basic,'fromDate','from');
     escDate(basic,'fromDate','from');
 
-    updateDate(basic,'fromDate Test keyboard events2 ','05/04/2010','MM/DD/YYYY','from');
+    updateDate(basic,'fromDate Test keyboard events2','05/04/2010','MM/DD/YYYY','from');
     enterDate(basic,'fromDate','from');
 
     suite('Wait until success class clears', function() {
@@ -378,11 +378,7 @@ function updateDate(parent, elem, date, format, field){
     });
 
     test('added changed class',function(done){
-      flush(function(){
-        assert.isTrue(elemDiv.classList.contains('validation-changed'));
-        done();
-      });
-
+      assert.isTrue(elemDiv.classList.contains('validation-changed'));
     });
   });
 }
