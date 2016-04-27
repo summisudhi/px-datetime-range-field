@@ -5,7 +5,11 @@ Px-Datetime-Range-Field
 
 Px-Datetime-Range-Field is a Predix Experience ('Px') component
 
-## Getting Started
+## documentation
+
+Read the full API and view the demo [here](https://predixdev.github.io/px-datetime-range-field).
+
+## Local Development
 
 Read https://github.com/pages/PX/technical-principles/
 
@@ -71,22 +75,6 @@ watch: {
     }
 }
 ```
-
-### Options
-
-Does this component have runtime configuration options?  If so, they should be able to be passed as attributes on the element with examples shown below.
-
-### Function calls
-
-What is the public API of this component?
-
-### Extending styles
-
-Documented CSS extension points?
-
-### Extending behavior
-
-See Polymer composition patterns
 
 GE Coding Style Guide
 ---------------------
