@@ -377,8 +377,12 @@ function updateDate(parent, elem, date, format, field){
       assert.equal(elemDate.moment.format(format),date);
     });
 
-    test('added changed class',function(){
-      assert.isTrue(elemDiv.classList.contains('validation-changed'));
+    test('added changed class',function(done){
+      flush(function(){
+        assert.isTrue(elemDiv.classList.contains('validation-changed'));
+        done();
+      });
+
     });
   });
 }
