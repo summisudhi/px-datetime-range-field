@@ -152,6 +152,30 @@ Px datetime component that displays and validates a date time range.
       autoSubmit:{
         type: Boolean,
         value: false
+      },
+      /**
+       * (optional)
+       *
+       * Bool to decide whether to show the 'validation-changed' class when there has been a change on the input but has not been submitted
+       * - true - 'validation-changed' class will appear when there has been a change on the input but has not been submitted
+       * - false - 'validation-changed' class will not appear
+       *
+       */
+      showChangedClass:{
+        type: Boolean,
+        value: false
+      },
+      /**
+       * (optional)
+       *
+       * Bool to decide whether to show the 'validation-success' class when the input but has been submitted
+       * - true - 'validation-success' class will appear when the input but has been submitted
+       * - false - 'validation-success' class will not appear
+       *
+       */
+      showSuccessClass:{
+        type: Boolean,
+        value: false
       }
     },
 
@@ -270,12 +294,14 @@ Px datetime component that displays and validates a date time range.
       // TODO: enable the moment change, but not applied
       this.toggleClass('visuallyhidden', false, this.$$('#dtBtns'));
 
-      if(evt.detail.moment===this.toMoment){
-        this.toggleClass('validation-changed', true, this.$$('#toFields'));
-        this.toggleClass('is-focused', true, this.$$('#toFields'));
-      } else {
-        this.toggleClass('validation-changed', true, this.$$('#fromFields'));
-        this.toggleClass('is-focused', true, this.$$('#fromFields'));
+      if(this.showChangedClass){
+        if(evt.detail.moment===this.toMoment){
+          this.toggleClass('validation-changed', true, this.$$('#toFields'));
+          this.toggleClass('is-focused', true, this.$$('#toFields'));
+        } else {
+          this.toggleClass('validation-changed', true, this.$$('#fromFields'));
+          this.toggleClass('is-focused', true, this.$$('#fromFields'));
+        }
       }
 
       if(this.autoSubmit){
@@ -385,7 +411,9 @@ Px datetime component that displays and validates a date time range.
           from: this.fromMoment.toISOString(),
           to: this.toMoment.toISOString()
         });
-        this._toggleSuccessClasses();
+        if(this.showSuccessClass){
+          this._toggleSuccessClasses();
+        }
       } else {
         // this.returnLastFocus(); //not convinced we need
         this._setRange();
