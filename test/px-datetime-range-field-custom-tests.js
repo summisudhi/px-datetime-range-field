@@ -515,11 +515,15 @@ function fireButtonClickCancel(elem){
 }
 
 function fireKeyboardEnter(elem){
-   var evt = new KeyboardEvent("keydown", {code: "Enter", keyIdentifier:"Enter", key:"Enter" });
+  var kbe = document.createEvent("KeyboardEvent");
+  var evt = kbe.initKeyboardEvent("keydown", true, true, window, "Enter", false, false, false, false);
+  //  var evt = new KeyboardEvent("keydown", {code: "Enter", keyIdentifier:"Enter", key:"Enter" });
    elem.dispatchEvent(evt);
 }
 
 function fireKeyboardEsc(elem){
-   var evt = new KeyboardEvent('keydown', {code:'Esc',keyIdentifier:'Esc',key:'Esc'});
+  var kbe = document.createEvent("KeyboardEvent");
+  var evt = kbe.initKeyboardEvent("keydown", true, true, window, "Enter", false, false, false, false);
+  //  var evt = new KeyboardEvent("keydown", {code:'Esc',keyIdentifier:'Esc',key:'Esc'});
    elem.dispatchEvent(evt);
 }
