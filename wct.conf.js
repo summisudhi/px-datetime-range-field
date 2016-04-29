@@ -1,37 +1,3 @@
-module.exports = {
-  verbose: false,
-  plugins: {
-    local: {
-        browsers: ['chrome', 'firefox']
-    },
-    sauce: {
-      disabled: true,
-      "browsers": [{
-          "browserName": "microsoftedge",
-          "platform": "Windows 10",
-          "version": ""
-        }, {
-          "browserName": "internet explorer",
-          "platform": "Windows 8.1",
-          "version": "11"
-        },
-        {
-          "browserName": "safari",
-          "platform": "OS X 10.11",
-          "version": "9"
-        }, {
-          "browserName": "safari",
-          "platform": "OS X 10.10",
-          "version": "8"
-        }
-      ]
-    }
-  },
-  suites: [
-    'test/px-datetime-range-field-test-fixture.html'
-  ]
-};
-
 
 module.exports = {
     verbose: false,
@@ -40,18 +6,18 @@ module.exports = {
             browsers: ['chrome', 'firefox']
         },
         sauce: {
-             "disabled" : false,
+             "disabled" : true,
              "browsers": [
              
         
         {
           "browserName": "chrome",
-          "platform": "Windows 10",
-          "version": "44"
+          "platform": "OS X 10.10",
+          "version": "49"
         },
          {
           "browserName": "firefox",
-          "platform": "Windows 8.1",
+          "platform": "OS X 10.10",
           "version": "44"
         },
          {
