@@ -114,7 +114,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Applying a new datetime', function() {
-    updateDate(basic,'fromDate','05/04/2013','MM/DD/YYYY','from', 'Test Applying a new datetime');
+    updateDate(basic,'fromDate','05/04/2013','MM/DD/YYYY','from');
     applyDate(basic,'fromDate','from');
 
     updateDate(basic,'fromTime','12:00:00 PM','hh:mm:ss A','from');
@@ -139,7 +139,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Canceling a new datetime', function() {
-    updateDate(basic,'fromDate','06/04/2013','MM/DD/YYYY','from', 'Test Canceling a new datetime');
+    updateDate(basic,'fromDate','06/04/2013','MM/DD/YYYY','from');
     cancelDate(basic,'fromDate','from');
 
     updateDate(basic,'fromTime','01:00:00 PM','hh:mm:ss A','from');
@@ -153,7 +153,7 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test Canceling a new datetime', function() {
-    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from', 'Test Canceling a new datetime');
+    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from');
     invalidDate(basic,'fromDate','from');
 
     updateDate(basic,'toDate','10/14/2012','MM/DD/YYYY','to');
@@ -161,11 +161,11 @@ function runBasicTests(now, weekAgo){
   });
 
   suite('Test keyboard events', function() {
-    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from', 'Test keyboard events');
+    updateDate(basic,'fromDate','05/04/2016','MM/DD/YYYY','from');
     invalidDate(basic,'fromDate','from');
     escDate(basic,'fromDate','from');
 
-    updateDate(basic,'fromDate','05/04/2010','MM/DD/YYYY','from', 'Test keyboard events2');
+    updateDate(basic,'fromDate','05/04/2010','MM/DD/YYYY','from');
     enterDate(basic,'fromDate','from');
 
     suite('Wait until success class clears', function() {
@@ -363,8 +363,8 @@ function checkIfElemExists(elem,str) {
   });
 }
 
-function updateDate(parent, elem, date, format, field, log){
-  suite('Update ' + elem + ' ' + log, function() {
+function updateDate(parent, elem, date, format, field){
+  suite('Update ' + elem, function() {
     var elemDate = Polymer.dom(parent.root).querySelector('#'+elem);
     var elemDiv = Polymer.dom(parent.root).querySelector('#'+field+'Fields');
 
@@ -520,6 +520,6 @@ function fireKeyboardEnter(elem){
 }
 
 function fireKeyboardEsc(elem){
-   var evt = new KeyboardEvent('keydown', {code:'Esc',keyIdentifier:'Esc', key:'Esc'});
-   elem.dispatchEvent(evt);
+   var evt = new KeyboardEvent("keydown", {code:'Esc',keyIdentifier:'Esc',key:'Esc'});
+   elem.dispatchEvent(evt);  
 }
